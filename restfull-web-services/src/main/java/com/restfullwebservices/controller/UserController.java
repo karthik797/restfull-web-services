@@ -6,6 +6,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +36,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/{id}")
-	public User getFindUser(@PathVariable int id)
+	public Resource<User> getFindUser(@PathVariable int id)
 	{
 			User user=userservice.findUser(id);
 			if(user==null)
@@ -40,10 +44,16 @@ public class UserController {
 				throw new UserNotFoundException("Id-" + id );
 				
 			}
-			else
-			{
-				return user;
-			}
+			
+				Resource<User> resource=new Resource<User>(user);
+				
+				ControllerLinkBuilder linkTo=
+				linkTo(methodOn(this.getClass()).getAllUsers());
+				resource.add(linkTo.withRel("all-user"));
+				return resource;
+			
+			
+			
 	}
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable int id)
