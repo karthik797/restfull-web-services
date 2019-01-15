@@ -32,6 +32,7 @@ public class SwaggerConfig {
 			.apiInfo(DEFAULT_API_INFO)
 			.produces(PRODUCER_CONSUMER)
 			.consumes(PRODUCER_CONSUMER)
+			
 			;
 	
 	}

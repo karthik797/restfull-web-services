@@ -2,13 +2,17 @@ package com.restfullwebservices.model;
 
 import java.util.Date;
 
+
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description="all details about the user")
+@Entity
 public class User {
 
 	private Integer id;
