@@ -2,11 +2,12 @@ package com.restfullwebservices.model;
 
 import java.util.Date;
 
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.Entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,6 +16,8 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 public class User {
 
+	@Id
+	@GeneratedValue
 	private Integer id;
 	
 	@Size(min=2, message="Name should have 2 charectors ")
